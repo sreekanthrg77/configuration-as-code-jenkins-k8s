@@ -1,7 +1,28 @@
 def jobconfig = """
 XML JOB HERE
 """
-
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>header(&quot;Content-Type: text/xml&quot;)
+echo &quot; xml version=&apos;1.0&apos; encoding=&apos;UTF-8&apos; standalone=&apos;yes&apos; &quot;;</command>
+      <configuredLocalRules/>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
 /*
 1. Make a copy (X) of the `xml_to_jobdsl_template.groovy` template file.
     > NB: A "JobDSL .groovy file" must be named with letters and underscores.
@@ -16,7 +37,7 @@ XML JOB HERE
 
 def jobconfignode = new XmlParser().parseText(jobconfig)
 
-job('replace-me-jobdsl') {
+job('sreekanth-in-jobdsl') {
     configure { node ->
         // node represents <project>
         jobconfignode.each { child ->
